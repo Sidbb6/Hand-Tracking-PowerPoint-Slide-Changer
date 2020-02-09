@@ -1,3 +1,9 @@
+#For a video of this code in action with a presentation in tandem go to https://www.youtube.com/watch?v=glZ-DQy6r5Q
+# the video in the Devpost submission shows the backend whereas this video shows how the code controlled the presentation
+
+
+
+
 import handy
 import cv2
 import time
@@ -41,8 +47,8 @@ def inCenter(x,y):
         return True
     else:
         return False
-ret, frame = cap.read()
-hand = handy.detect_hand(frame, hist)
+fire, screen = cap.read()
+hand = handy.detect_hand(screen, hist)
 com = hand.get_center_of_mass()
    
 resetTime =0
@@ -50,15 +56,15 @@ prevStatey = com[0]
 prevStatex = com[1]
                 
 while True:
-    ret, frame = cap.read()
-    if not ret:
+    fire, screen = cap.read()
+    if not fire:
         break
     # to block a faces in the video stream, set block=True.
     # if you just want to detect the faces, set block=False
     # if you do not want to do anything with faces, remove this line
-    handy.detect_face(frame, block=True)
+    handy.detect_face(screen, block=True)
     # detect the hand
-    hand = handy.detect_hand(frame, hist)
+    hand = handy.detect_hand(screen, hist)
     # to get the outline of the hand
     # min area of the hand to be detected = 10000 by default
     custom_outline = hand.draw_outline(
