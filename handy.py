@@ -2,7 +2,7 @@ import cv2
 import math
 from Hand import Hand
 
-
+# Draws a Rectangle around a face to use as a reference point for hands
 def detect_face(frame, block=False, colour=(0, 0, 0)):
     fill = [1, -1][block]
     face_cascade = cv2.CascadeClassifier(
@@ -17,7 +17,6 @@ def detect_face(frame, block=False, colour=(0, 0, 0)):
             area = w * h
             X, Y, W, H = x, y, w, h
     cv2.rectangle(frame, (X, Y), (X + W, Y + H), colour, fill)
-
 
 def capture_histogram(source=0):
     cap = cv2.VideoCapture(source)
@@ -51,7 +50,6 @@ def capture_histogram(source=0):
     cap.release()
     return object_hist
 
-
 def locate_object(frame, object_hist):
     hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
@@ -76,7 +74,6 @@ def locate_object(frame, object_hist):
     masked = cv2.bitwise_and(frame, frame, mask=closing)
 
     return closing, masked, segment_thresh
-
 
 def detect_hand(frame, hist):
     detected_hand, masked, raw = locate_object(frame, hist)

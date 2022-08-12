@@ -3,7 +3,6 @@ import math
 
 
 class Hand:
-
     def __init__(self, binary, masked, raw, frame):
         self.masked = masked
         self.binary = binary
